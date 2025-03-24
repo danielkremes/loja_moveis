@@ -1,0 +1,15 @@
+.container-footer {
+    border: 1px solid rgb(0, 1, 37);
+    background-color: #333333;
+}
+
+.container-footer-child {
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#creator-site {
+    color: orange;
+}

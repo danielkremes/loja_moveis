@@ -1,0 +1,34 @@
+.container-main {
+    /* border: 1px solid rgb(136, 61, 61); */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-child-main  {
+    /* border: 1px solid grey; */
+    flex-grow: 1;
+    flex-basis: 300px;
+    padding: 1rem;
+}
+
+.container-child-main img {
+    width: 300px;
+}
+
+@media (max-width: 768px ) {
+    .container-main {
+        /* border: 1px solid rgb(136, 61, 61); */
+        display: block;
+    }
+    
+    .container-child-main  {
+        /* border: 1px solid grey; */
+        display: block;
+    }
+    
+    .container-child-main img {
+        width: 100%;
+    }
+}
