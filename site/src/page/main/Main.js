@@ -1,363 +1,179 @@
-import "./Main.css"
+import React, { useState } from 'react';
+import './Main.css';
 
 const Main = () => {
+    // State for carousel indexes in each section
+    const [currentIndex, setCurrentIndex] = useState({
+        section1: 0,
+        section2: 0,
+        section3: 0,
+    });
+
+    const images1 = ['./1.jpeg', './2.jpeg', './3.jpeg'];  // Images for section 1
+    const images2 = ['./4.jpeg', './5.jpeg', './6.jpeg'];  // Images for section 2
+    const images3 = ['./7.jpeg', './8.jpeg', './9.jpeg'];  // Images for section 3
+
+    // Function to move to the next slide
+    const nextSlide = (section) => {
+        setCurrentIndex((prevIndex) => {
+            const nextIndex = (prevIndex[section] + 1) % imagesForSection(section).length;
+            return {
+                ...prevIndex,
+                [section]: nextIndex,
+            };
+        });
+    };
+
+    // Function to move to the previous slide
+    const prevSlide = (section) => {
+        setCurrentIndex((prevIndex) => {
+            const prevIndexValue = (prevIndex[section] - 1 + imagesForSection(section).length) % imagesForSection(section).length;
+            return {
+                ...prevIndex,
+                [section]: prevIndexValue,
+            };
+        });
+    };
+
+    // Function to return the images for each section
+    const imagesForSection = (section) => {
+        switch (section) {
+            case 'section1':
+                return images1;
+            case 'section2':
+                return images2;
+            case 'section3':
+                return images3;
+            default:
+                return [];
+        }
+    };
+
     return (
         <main className="container-main">
+            {/* Section 1 */}
             <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE</h1>
-                <img src="./1.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
+                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE - Seção 1</h1>
 
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
+                <div className="slider">
+                    <div
+                        className="slider-container"
+                        style={{ transform: `translateX(-${currentIndex.section1 * 100}%)` }}
+                    >
+                        {imagesForSection('section1').map((src, index) => (
+                            <img key={index} src={src} alt={`Imagem ${index + 1}`} />
+                        ))}
+                    </div>
 
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
+                    <button className="prev" onClick={() => prevSlide('section1')}>
+                        &#10094;
+                    </button>
+                    <button className="next" onClick={() => nextSlide('section1')}>
+                        &#10095;
+                    </button>
+                </div>
+                <p> TO Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira. A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
+            </section>
 
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
+            {/* Section 2 */}
+            <section className="container-child-main">
+                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE - Seção 2</h1>
 
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
 
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
+                <div className="slider">
+                    <div
+                        className="slider-container"
+                        style={{ transform: `translateX(-${currentIndex.section2 * 100}%)` }}
+                    >
+                        {imagesForSection('section2').map((src, index) => (
+                            <img key={index} src={src} alt={`Imagem ${index + 1}`} />
+                        ))}
+                    </div>
+
+                    <button className="prev" onClick={() => prevSlide('section2')}>
+                        &#10094;
+                    </button>
+                    <button className="next" onClick={() => nextSlide('section2')}>
+                        &#10095;
+                    </button>
+                </div>
+
+                <p> TO Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira. A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
+            </section>
+
+            {/* Section 3 */}
+            <section className="container-child-main">
+                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE - Seção 3</h1>
+
+                <div className="slider">
+                    <div
+                        className="slider-container"
+                        style={{ transform: `translateX(-${currentIndex.section3 * 100}%)` }}
+                    >
+                        {imagesForSection('section3').map((src, index) => (
+                            <img key={index} src={src} alt={`Imagem ${index + 1}`} />
+                        ))}
+                    </div>
+
+                    <button className="prev" onClick={() => prevSlide('section3')}>
+                        &#10094;
+                    </button>
+                    <button className="next" onClick={() => nextSlide('section3')}>
+                        &#10095;
+                    </button>
+                </div>
+                <p> TO Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira. A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
+            </section>
+
+               {/* Section 3 */}
+               <section className="container-child-main">
+                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE - Seção 3</h1>
+
+                <div className="slider">
+                    <div
+                        className="slider-container"
+                        style={{ transform: `translateX(-${currentIndex.section3 * 100}%)` }}
+                    >
+                        {imagesForSection('section3').map((src, index) => (
+                            <img key={index} src={src} alt={`Imagem ${index + 1}`} />
+                        ))}
+                    </div>
+
+                    <button className="prev" onClick={() => prevSlide('section3')}>
+                        &#10094;
+                    </button>
+                    <button className="next" onClick={() => nextSlide('section3')}>
+                        &#10095;
+                    </button>
+                </div>
+                <p> TO Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira. A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
             </section>
 
             <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./2.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
+                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE - Seção 3</h1>
 
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
+                <div className="slider">
+                    <div
+                        className="slider-container"
+                        style={{ transform: `translateX(-${currentIndex.section3 * 100}%)` }}
+                    >
+                        {imagesForSection('section3').map((src, index) => (
+                            <img key={index} src={src} alt={`Imagem ${index + 1}`} />
+                        ))}
+                    </div>
 
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
+                    <button className="prev" onClick={() => prevSlide('section3')}>
+                        &#10094;
+                    </button>
+                    <button className="next" onClick={() => nextSlide('section3')}>
+                        &#10095;
+                    </button>
+                </div>
+                <p> TO Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira. A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
             </section>
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./3.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./4.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./5.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./6.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./7.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./8.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./9.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./10.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./11.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
-
-            <section className="container-child-main">
-                <h1>GUARDA ROUPAS CASAL 6 PORTAS DEMARTEZ ÁTRICE </h1>
-                <img src="./12.jpeg"></img>
-                <p>O Guarda Roupa Atrice traz em seu design a união da beleza, funcionalidade e versatilidade, devido as diversas configurações e disposição de portas, sendo todas em espelho ou simplesmente em madeira.</p>
-
-                <p>A harmonia de cores, disposição de puxadores, juntamente com o fechamento total das molduras envolventes embelezam o produto e o ambiente.</p>
-
-                <p>Qualidade em todos os detalhes: na escolha dos materiais, ao cuidado no planejamento e na realização.</p>
-
-                <p>Os acabamentos das linhas da DEMARTÊZ, são o resultado de pesquisas estéticas em madeiras redefinindo suas características intrínsecas e propondo diferentes tonalidades como o AMÊNDOLA e o ÂMBAR, materiais inspiradas na natureza em contraste elegante com o OFF-WHITE caracterizado por composições originais e de impacto visual elegante de cores destinados aos dormitórios.</p>
-
-                <p><strong>Características:</strong></p>
-                <ul>
-                    <li><strong>Portas:</strong> Sim, 6 convencionais.</li>
-                    <li><strong>Gavetas:</strong> Sim, 6 com corrediças telescópicas.</li>
-                    <li><strong>Puxador:</strong> Sim, em alumínio.</li>
-                    <li><strong>Prateleira:</strong> Sim, 4.</li>
-                    <li><strong>Maleiro:</strong> Sim, 3.</li>
-                    <li><strong>Cabideiro:</strong> Sim, 3 metálicos.</li>
-                    <li><strong>Rodapé:</strong> Sim.</li>
-                </ul>
-
-                <p><strong>Peso máximo que suporta:</strong></p>
-                <ul>
-                    <li><strong>Guarda-Roupa:</strong> 65kg</li>
-                    <li><strong>Gavetas:</strong> 5kg</li>
-                </ul>
-            </section>
-
+            
         </main>
     );
-}
+};
 
 export default Main;

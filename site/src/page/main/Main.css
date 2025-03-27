@@ -1,75 +1,96 @@
 .container-main {
-    /* Flex container setup */
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* Garante que os itens não sejam centralizados verticalmente */
+    justify-content: center; /* Alinha os itens no centro */
     font-family: Arial, Helvetica, sans-serif;
     color: #333;
-    margin: 0 auto; /* Centering the container if needed */
     padding: 20px;
 }
 
 .container-child-main {
-    /* Flexbox settings */
     flex-grow: 1;
-    flex-basis: 400px;
-    padding: 1rem;
-    margin: 10px; /* Space between items */
+    flex-basis: 400px; /* Tamanho base maior para desktop */
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    color: #333;
+    margin: 10px; /* Adiciona um espaço entre as seções */
     box-sizing: border-box;
-    transition: all 0.10s ease; /* Smooth transition for layout changes */
-    perspective: 500px;
+}
+
+.slider {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.slider-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
 }
 
 .container-child-main p {
     font-size: 1.3rem;
     text-align: justify;
-    line-height: 1.6; /* Makes the text more readable */
-    perspective: 1000px;
-}
-
-.container-child-main:hover {
-    padding: 1.5rem;
-    transition: transform 0.5s;
-    background-color: #333;
-    color: #ffffff;
-    transition: padding 0.5s ease-in-out, background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-}
-
-.container-child-main img {
-    width: 100%; /* Makes images responsive */
-    max-width: 300vw; /* Keeps images within a reasonable size */
-    height: auto; /* Maintains aspect ratio */
-}
-
-.container-child-main > img:hover {
-    max-width: 100vw;
+    line-height: 1.6;
 }
 
 .container-child-main > ul {
     list-style: none;
-    padding-left: 0; /* Removes default list padding */
+    padding-left: 0;
 }
 
 .container-child-main ul li {
-    margin: 8px 0; /* Adds space between list items */
+    margin: 8px 0;
 }
 
+/* Media Query para telas menores */
 @media (max-width: 768px) {
     .container-main {
-        display: block;
-    }
-
-    .container-main h1 {
-        font-size: 1.2rem; /* Adjust the heading size for smaller screens */
+        padding: 10px;
+        display: flex;
+        flex-direction: column; /* Alinha as seções em coluna em telas menores */
+        justify-content: flex-start; /* Alinha as seções no topo */
     }
 
     .container-child-main {
-        display: block;
-        margin: 10px 0; /* Adds spacing between stacked items */
+        flex-basis: 100%; /* Faz as seções ocuparem toda a largura da tela */
+        margin: 10px 0; /* Ajusta o espaçamento entre as seções */
     }
 
-    .container-child-main img {
-        width: 100%; /* Makes images scale with screen size */
+    .slider-container img {
+        width: 100%;
     }
 }
